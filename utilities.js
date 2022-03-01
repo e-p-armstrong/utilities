@@ -24,7 +24,7 @@ function take(arr,count) { //takes a certain number of elements from the front o
     }
 }
 
-function endTake(arr,count){
+function endTake(arr,count){ //Takes a certain number of elements from the back of a list and returns the elements
     if (count >= 0){
         return arr.slice(-count)
     }
@@ -50,4 +50,4 @@ function numberBetween(n1,n2){ //Returns a number in-between the two parameters,
     return lesser + Math.round(Math.random() * (greater-lesser))
 }
 
-console.log(numberBetween(5,10))
+export {numberBetween, endTake, take, formatNumber}
