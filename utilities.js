@@ -50,4 +50,77 @@ function numberBetween(n1,n2){ //Returns a number in-between the two parameters,
     return lesser + Math.round(Math.random() * (greater-lesser))
 }
 
+//Beginning of Caesar Cipher Code
+export const alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+
+function wrapAround (number){
+  if (number < 0){
+      console.log(`90+number = ${90+number}`)
+    return (91+number)
+  }
+  else{
+    return number +65
+  }
+}
+
+    // Cipher Class Below
+class Caesar{
+  
+    constructor (shift){
+    this.shift = shift
+  }
+
+  encrypt(str){
+    if(this.shift < 0){
+        throw "Positive shifts only plz"
+    }
+    
+    let strArr = str.split('').map(char => char.toUpperCase())
+    console.log(strArr) //Creates a variable that is equal to the input string (split into an array of uppercased characters)
+    
+    const unicodeArr = strArr.map((char) =>{ //Makes a variable that is equal to the an array of the unicode equivalents of each character in the uppercased string.
+      let newChar = char
+      if (alphabet.includes(char)){
+        newChar = wrapAround((char.charCodeAt(0) - 65 + this.shift) % 26)
+      }
+      return newChar })
+    const resultArray = []
+    unicodeArr.map(uni =>{
+        if (typeof uni === "number"){
+            resultArray.push(String.fromCharCode(uni))
+        }
+        else{
+            resultArray.push(uni)
+        }
+       })
+  return resultArray.join('')
+  }
+
+
+  decrypt(str){
+    let strArr = str.split('').map(char => char.toUpperCase())
+    console.log(strArr) //Creates a variable that is equal to the input string (split into an array of uppercased characters)
+    
+    const unicodeArr = strArr.map((char) =>{ //Makes a variable that is equal to the an array of the unicode equivalents of each character in the uppercased string.
+      let newChar = char
+      if (alphabet.includes(char)){
+        newChar = wrapAround((char.charCodeAt(0) - 65) - this.shift % 26)
+      }
+      return newChar })
+    const resultArray = []
+    unicodeArr.map(uni =>{
+        if (typeof uni === "number"){
+            resultArray.push(String.fromCharCode(uni))
+        }
+        else{
+            resultArray.push(uni)
+        }
+       })
+  return resultArray.join('').toLowerCase()
+  }
+}
+
+//End of Cipher Code
+
 export {numberBetween, endTake, take, formatNumber}
+
