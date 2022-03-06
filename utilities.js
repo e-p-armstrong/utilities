@@ -51,7 +51,7 @@ function numberBetween(n1,n2){ //Returns a number in-between the two parameters,
 }
 
 //Beginning of Caesar Cipher Code
-export const alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+const alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 
 function wrapAround (number){
   if (number < 0){
@@ -75,8 +75,7 @@ class Caesar{
         throw "Positive shifts only plz"
     }
     
-    let strArr = str.split('').map(char => char.toUpperCase())
-    console.log(strArr) //Creates a variable that is equal to the input string (split into an array of uppercased characters)
+    let strArr = str.split('').map(char => char.toUpperCase()) //Creates a variable that is equal to the input string (split into an array of uppercased characters)
     
     const unicodeArr = strArr.map((char) =>{ //Makes a variable that is equal to the an array of the unicode equivalents of each character in the uppercased string.
       let newChar = char
@@ -104,7 +103,7 @@ class Caesar{
     const unicodeArr = strArr.map((char) =>{ //Makes a variable that is equal to the an array of the unicode equivalents of each character in the uppercased string.
       let newChar = char
       if (alphabet.includes(char)){
-        newChar = wrapAround((char.charCodeAt(0) - 65) - this.shift % 26)
+        newChar = wrapAround((char.charCodeAt(0) - 65 - this.shift) % 26) //possibly caught a bug, possibly introduced one: moved first closing bracket from the -65) to the - this.shift) because otherwise I'm mod division-ing the shift, not the unicode code - 65 - the shift. IT WORKS!
       }
       return newChar })
     const resultArray = []
@@ -122,5 +121,5 @@ class Caesar{
 
 //End of Cipher Code
 
-export {numberBetween, endTake, take, formatNumber}
+export {numberBetween, endTake, take, formatNumber, alphabet}
 
