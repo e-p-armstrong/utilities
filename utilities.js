@@ -20,7 +20,7 @@ function take(arr,count) { //takes a certain number of elements from the front o
         return arr.slice(0,count);
     }
     else{
-        throw "take given a negative count";
+        throw "take given a negative count"; //Peace was never an option. Yes this is extreme. No I don't care. Your code will be safe goddamn it.
     }
 }
 
@@ -29,7 +29,7 @@ function endTake(arr,count){ //Takes a certain number of elements from the back 
         return arr.slice(-count)
     }
     else{
-        throw "endTake given a negative count"
+        throw "endTake given a negative count";
     }
 }
 
